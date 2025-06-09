@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday, My Love! 🎉</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #fff1f8, #ffe4e1, #ffeef0);
+      color: #333;
+      margin: 0;
+      padding: 2rem;
+      text-align: center;
+      min-height: 100vh;
+      box-sizing: border-box;
+      overflow-x: hidden;
+      position: relative;
+    }
+    
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 20% 50%, rgba(255, 64, 129, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 192, 203, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(255, 105, 180, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    h1 {
+      color: #ff4081;
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 1rem;
+      animation: pulse 2s infinite;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      margin: 1rem auto;
+      padding: 2rem;
+      border-radius: 2rem;
+      max-width: 800px;
+      width: 90%;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      position: relative;
+      z-index: 2;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .note, .secret, .gallery, .media {
+      margin: 2rem 0;
+      padding: 1rem;
+    }
+    
+    .secret-btn {
+      background: linear-gradient(45deg, #ff4081, #e73370);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      border-radius: 2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 64, 129, 0.3);
+      text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    
+    .secret-btn:hover {
+      background: linear-gradient(45deg, #e73370, #d12c5c);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 64, 129, 0.4);
+    }
+    
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    
+    .photo-placeholder {
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(45deg, #ffb3ba, #bae1ff);
+      border-radius: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: #666;
+      margin: 0 auto;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    .photo-placeholder:hover {
+      transform: scale(1.05);
+    }
+    
+    .media-container {
+      background: rgba(255, 255, 255, 0.5);
+      padding: 1.5rem;
+      border-radius: 1rem;
+      margin: 1rem 0;
+    }
+    
+    .placeholder-audio, .placeholder-video {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      margin: 1rem 0;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    .hidden {
+      display: none;
+    }
+    
+    #passwordContainer {
+      margin-top: 3rem;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      padding: 3rem 2rem;
+      border-radius: 2rem;
+      max-width: 500px;
+      margin: 3rem auto;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    #passwordContainer h2 {
+      color: #ff4081;
+      margin-bottom: 2rem;
+    }
+    
+    input[type="password"] {
+      padding: 1rem;
+      font-size: 1.1rem;
+      border-radius: 1rem;
+      border: 2px solid #ffb3ba;
+      width: 60%;
+      margin-right: 1rem;
+      transition: border-color 0.3s ease;
+      outline: none;
+    }
+    
+    input[type="password"]:focus {
+      border-color: #ff4081;
+      box-shadow: 0 0 10px rgba(255, 64, 129, 0.2);
+    }
+    
+    .unlock-btn {
+      background: linear-gradient(45deg, #ff4081, #e73370);
+      color: white;
+      border: none;
+      padding: 1rem 1.5rem;
+      font-size: 1.1rem;
+      border-radius: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 64, 129, 0.3);
+    }
+    
+    .unlock-btn:hover {
+      background: linear-gradient(45deg, #e73370, #d12c5c);
+      transform: translateY(-2px);
+    }
+    
+    .balloon {
+      position: fixed;
+      width: 40px;
+      height: 60px;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      animation: float 8s infinite linear;
+      z-index: 1;
+      bottom: -100px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      border: 2px solid rgba(255,255,255,0.6);
+    }
+    
+    @keyframes float {
+      0% { 
+        transform: translateY(0) rotate(0deg); 
+        opacity: 0.8; 
+      }
+      10% { 
+        opacity: 1; 
+      }
+      100% { 
+        transform: translateY(-110vh) rotate(360deg); 
+        opacity: 0; 
+      }
+    }
+    
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    
+    .heart {
+      position: absolute;
+      font-size: 1.5rem;
+      color: #ff4081;
+      animation: heartFloat 6s infinite linear;
+      opacity: 0.7;
+    }
+    
+    @keyframes heartFloat {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.7;
+      }
+      90% {
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+      
+      .container, #passwordContainer {
+        margin: 1rem auto;
+        padding: 1.5rem;
+      }
+      
+      input[type="password"] {
+        width: 100%;
+        margin-bottom: 1rem;
+        margin-right: 0;
+      }
+      
+      .unlock-btn {
+        width: 100%;
+      }
+      
+      .gallery {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      }
+      
+      .photo-placeholder {
+        width: 100px;
+        height: 100px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts" id="hearts"></div>
+  
+  <div id="passwordContainer">
+    <h2>🎂 Enter Password to See Your Birthday Surprise</h2>
+    <input type="password" id="passwordInput" placeholder="Enter password" />
+    <button class="unlock-btn" onclick="checkPassword()">Unlock</button>
+    <p id="errorMsg" style="color: #e73370; margin-top: 1rem;"></p>
+  </div>
+
+  <div class="container hidden" id="loveApp">
+    <h1>🎉 Happy Birthday, My Love! 🎂</h1>
+
+    <div class="note">
+      <h2>💝 Special Birthday Note</h2>
+      <p id="loveNote" style="font-size: 1.2rem; line-height: 1.6; color: #555;"></p>
+    </div>
+
+    <div class="gallery">
+      <div class="photo-placeholder">📸</div>
+      <div class="photo-placeholder">💕</div>
+      <div class="photo-placeholder">🌹</div>
+      <div class="photo-placeholder">✨</div>
+    </div>
+
+    <div class="secret">
+      <h2>🎁 Click to Reveal Your Birthday Message</h2>
+      <button class="secret-btn" onclick="revealMessage()">Open Gift</button>
+      <p id="secretMessage" style="display:none; margin-top: 2rem; font-size: 1.2rem; line-height: 1.6; background: rgba(255, 192, 203, 0.1); padding: 1.5rem; border-radius: 1rem; border-left: 4px solid #ff4081;"></p>
+    </div>
+
+    <div class="media">
+      <div class="media-container">
+        <h2>🎵 Your Birthday Song</h2>
+        <div class="placeholder-audio">
+          🎵 Audio placeholder - Replace with your audio file 🎵
+          <br><small>Upload your audio file and update the src path</small>
+        </div>
+      </div>
+
+      <div class="media-container">
+        <h2>🎥 A Birthday Video</h2>
+        <div class="https://imgur.com/a/ECfrZfY">
+          🎬 Video placeholder - Replace with your video file 🎬
+          <br><small>Upload your video file and update the src path</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const correctPassword = "Momolove";
+
+    function checkPassword() {
+      const input = document.getElementById("passwordInput").value;
+      if (input === correctPassword) {
+        document.getElementById("passwordContainer").style.display = "none";
+        document.getElementById("loveApp").classList.remove("hidden");
+        startBalloons();
+        startHearts();
+      } else {
+        document.getElementById("errorMsg").textContent = "Incorrect password. Please try again. 💔";
+        document.getElementById("passwordInput").value = "";
+        document.getElementById("passwordInput").style.animation = "shake 0.5s";
+        setTimeout(() => {
+          document.getElementById("passwordInput").style.animation = "";
+        }, 500);
+      }
+    }
+
+    // Allow Enter key to submit password
+    document.getElementById("passwordInput").addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        checkPassword();
+      }
+    });
+
+    const notes = [
+      "Happy Birthday to the one who fills my life with love and joy! Every day with you feels like a celebration. 💖",
+      "Wishing you a day as beautiful as your smile and as wonderful as your heart! 🌟",
+      "Every moment with you is a reason to celebrate. You bring magic to my world! ✨",
+      "You're the greatest gift to my heart—today, I celebrate the amazing person you are! 🎈"
+    ];
+    const note = notes[new Date().getDate() % notes.length];
+    document.getElementById("loveNote").textContent = note;
+
+    function revealMessage() {
+      const messages = [
+        "Happy Birthday, my love! I wish I could be there to hold you close today, but I hope this brings the biggest smile to your beautiful face. You mean absolutely everything to me, and I can't wait to celebrate many more birthdays together! 💕",
+        "On your special day, I want you to know that you are the light of my life and the joy in my heart. Every day I'm grateful for you, but today especially, I celebrate the wonderful soul that you are! 🌟",
+        "My dearest love, as you blow out your candles today, know that you've already made all my wishes come true just by being in my life. Here's to another year of adventures, laughter, and endless love together! 🎂✨"
+      ];
+      const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+      document.getElementById("secretMessage").textContent = randomMessage;
+      document.getElementById("secretMessage").style.display = "block";
+      
+      // Add confetti effect
+      createConfetti();
+    }
+
+    function startBalloons() {
+      for (let i = 0; i < 15; i++) {
+        setTimeout(() => {
+          const balloon = document.createElement('div');
+          balloon.className = 'balloon';
+          balloon.style.left = Math.random() * 100 + 'vw';
+          balloon.style.backgroundColor = `hsl(${Math.random() * 60 + 300}, 70%, 70%)`;
+          balloon.style.animationDelay = `${Math.random() * 2}s`;
+          document.body.appendChild(balloon);
+          
+          // Remove balloon after animation
+          setTimeout(() => {
+            if (balloon.parentNode) {
+              balloon.parentNode.removeChild(balloon);
+            }
+          }, 8000);
+        }, i * 300);
+      }
+    }
+
+    function startHearts() {
+      for (let i = 0; i < 10; i++) {
+        setTimeout(() => {
+          const heart = document.createElement('div');
+          heart.className = 'heart';
+          heart.innerHTML = '💖';
+          heart.style.left = Math.random() * 100 + 'vw';
+          heart.style.animationDelay = `${Math.random() * 2}s`;
+          document.getElementById('hearts').appendChild(heart);
+          
+          // Remove heart after animation
+          setTimeout(() => {
+            if (heart.parentNode) {
+              heart.parentNode.removeChild(heart);
+            }
+          }, 6000);
+        }, i * 500);
+      }
+    }
+
+    function createConfetti() {
+      const colors = ['#ff4081', '#ffb3ba', '#bae1ff', '#ffffba', '#baffc9'];
+      for (let i = 0; i < 50; i++) {
+        const confetti = document.createElement('div');
+        confetti.style.position = 'fixed';
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.top = '-10px';
+        confetti.style.width = '10px';
+        confetti.style.height = '10px';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+        confetti.style.animation = `confettiFall 3s linear forwards`;
+        confetti.style.zIndex = '1000';
+        document.body.appendChild(confetti);
+        
+        setTimeout(() => {
+          if (confetti.parentNode) {
+            confetti.parentNode.removeChild(confetti);
+          }
+        }, 3000);
+      }
+    }
+
+    // Add confetti animation
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes confettiFall {
+        to {
+          transform: translateY(100vh) rotate(720deg);
+          opacity: 0;
+        }
+      }
+      @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        75% { transform: translateX(5px); }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>
