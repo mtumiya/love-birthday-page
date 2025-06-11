@@ -437,7 +437,10 @@
           video.muted = true;
           video.autoplay = true;
           video.loop = true;
-          video.controls = true; // Enable controls for better UX
+          video.controls = true;
+          video.playsInline = true; // Prevent fullscreen on mobile
+          video.setAttribute('webkit-playsinline', 'true'); // iOS Safari
+          video.setAttribute('playsinline', 'true'); // Additional mobile support
           video.style.width = "100%";
           video.style.height = "100%";
           video.style.objectFit = "contain";
