@@ -120,14 +120,24 @@
       margin: 1rem 0;
     }
     
-    .placeholder-audio, .placeholder-video {
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
       background: linear-gradient(45deg, #667eea, #764ba2);
-      color: white;
-      padding: 2rem;
       border-radius: 1rem;
+      overflow: hidden;
       margin: 1rem 0;
-      font-size: 1.1rem;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
     }
     
     .hidden {
@@ -319,7 +329,7 @@
       <div class="media-container">
         <h2>🎥 A Birthday Video</h2>
         <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <!-- Video will be inserted here after password entry -->
         </div>
       </div>
     </div>
@@ -370,7 +380,7 @@
       "Happy Birthday to the one who fills my life with love and joy! Every day with you feels like a celebration. 💖",
       "Wishing you a day as beautiful as your smile and as wonderful as your heart! 🌟",
       "Every moment with you is a reason to celebrate. You bring magic to my world! ✨",
-      "You're the greatest gift to my heart—today, I celebrate the amazing person you are! 🎈"
+      "You're the greatest gift to my heart ..today, I celebrate the amazing person you are! 🎈"
     ];
     const note = notes[new Date().getDate() % notes.length];
     document.getElementById("loveNote").textContent = note;
