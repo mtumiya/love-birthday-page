@@ -333,7 +333,7 @@
       <div class="media-container">
         <h2>🎥 A Birthday Video</h2>
         <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
       </div>
     </div>
@@ -349,8 +349,15 @@
         document.getElementById("loveApp").classList.remove("hidden");
         startBalloons();
         startHearts();
+        
         // Start playing the audio
-        document.querySelector('.audio-player').play();
+        const audioPlayer = document.querySelector('.audio-player');
+        audioPlayer.play().catch(e => console.log('Audio autoplay failed:', e));
+        
+        // Reload the iframe to trigger autoplay
+        const videoFrame = document.querySelector('.video-container iframe');
+        const videoSrc = videoFrame.src;
+        videoFrame.src = videoSrc;
       } else {
         document.getElementById("errorMsg").textContent = "Incorrect password. Please try again. 💔";
         document.getElementById("passwordInput").value = "";
