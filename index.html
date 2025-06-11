@@ -361,10 +361,11 @@
           video.controls = false;
           video.style.width = "100%";
           video.style.height = "100%";
-          video.style.objectFit = "cover";
+          video.style.objectFit = "contain";
           video.style.position = "absolute";
           video.style.top = "0";
           video.style.left = "0";
+          video.style.backgroundColor = "#000"; // Black background for letterboxing
           videoContainer.appendChild(video);
           
           // Start playing the video
