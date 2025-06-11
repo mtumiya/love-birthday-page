@@ -94,23 +94,24 @@
       margin: 2rem 0;
     }
     
-    .photo-placeholder {
-      width: 120px;
+    .photo-item {
+      width: 100%;
       height: 120px;
-      background: linear-gradient(45deg, #ffb3ba, #bae1ff);
       border-radius: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      color: #666;
-      margin: 0 auto;
+      overflow: hidden;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
       transition: transform 0.3s ease;
+      margin: 0 auto;
     }
     
-    .photo-placeholder:hover {
+    .photo-item:hover {
       transform: scale(1.05);
+    }
+    
+    .photo-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
     
     .media-container {
@@ -120,14 +121,28 @@
       margin: 1rem 0;
     }
     
-    .placeholder-audio, .placeholder-video {
-      background: linear-gradient(45deg, #667eea, #764ba2);
-      color: white;
-      padding: 2rem;
-      border-radius: 1rem;
+    .audio-player, .video-container {
+      width: 100%;
       margin: 1rem 0;
-      font-size: 1.1rem;
+      border-radius: 1rem;
+      overflow: hidden;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
+    }
+    
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 1rem;
     }
     
     .hidden {
@@ -269,8 +284,7 @@
         grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
       }
       
-      .photo-placeholder {
-        width: 100px;
+      .photo-item {
         height: 100px;
       }
     }
@@ -295,10 +309,18 @@
     </div>
 
     <div class="gallery">
-      <div class="photo-placeholder">📸</div>
-      <div class="photo-placeholder">💕</div>
-      <div class="photo-placeholder">🌹</div>
-      <div class="photo-placeholder">✨</div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dq38ct7ud/image/upload/v1749620015/IMG-20250611-WA0041_alwtsi.jpg" alt="Special moment 1">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dq38ct7ud/image/upload/v1749620015/IMG-20250611-WA0045_kjasso.jpg" alt="Special moment 2">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dq38ct7ud/image/upload/v1749620010/IMG-20250611-WA0034_ufcrje.jpg" alt="Special moment 3">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dq38ct7ud/image/upload/v1749620012/IMG-20250611-WA0051_jlxcmc.jpg" alt="Special moment 4">
+      </div>
     </div>
 
     <div class="secret">
@@ -310,17 +332,16 @@
     <div class="media">
       <div class="media-container">
         <h2>🎵 Your Birthday Song</h2>
-        <div class="placeholder-audio">
-          🎵 Audio placeholder - Replace with your audio file 🎵
-          <br><small>Upload your audio file and update the src path</small>
-        </div>
+        <audio class="audio-player" controls>
+          <source src="https://res.cloudinary.com/dq38ct7ud/video/upload/v1749618761/Ed_Sheeran_-_I_Chose_You_Epic_-_Famousfates_zx0q2x.mp3" type="audio/mp3">
+          Your browser does not support the audio element.
+        </audio>
       </div>
 
       <div class="media-container">
         <h2>🎥 A Birthday Video</h2>
-        <div class="https://imgur.com/a/ECfrZfY">
-          🎬 Video placeholder - Replace with your video file 🎬
-          <br><small>Upload your video file and update the src path</small>
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
       </div>
     </div>
