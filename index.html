@@ -324,7 +324,7 @@
     <div class="media">
       <div class="media-container">
         <h2>🎵 Your Birthday Song</h2>
-        <audio class="audio-player" controls>
+        <audio class="audio-player" controls autoplay>
           <source src="https://res.cloudinary.com/dq38ct7ud/video/upload/v1749618761/Ed_Sheeran_-_I_Chose_You_Epic_-_Famousfates_zx0q2x.mp3" type="audio/mp3">
           Your browser does not support the audio element.
         </audio>
@@ -349,6 +349,8 @@
         document.getElementById("loveApp").classList.remove("hidden");
         startBalloons();
         startHearts();
+        // Start playing the audio
+        document.querySelector('.audio-player').play();
       } else {
         document.getElementById("errorMsg").textContent = "Incorrect password. Please try again. 💔";
         document.getElementById("passwordInput").value = "";
