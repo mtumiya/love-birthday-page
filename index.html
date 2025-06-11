@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Happy Birthday, My Love! 🎉</title>
   <style>
     body {
@@ -66,6 +66,18 @@
       padding: 1rem;
     }
     
+    .note h2 {
+      margin-bottom: 0.5rem;
+    }
+    
+    #loveNote {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      color: #555;
+      transition: opacity 1s;
+      opacity: 1;
+    }
+    
     .secret-btn {
       background: linear-gradient(45deg, #ff4081, #e73370);
       color: white;
@@ -89,22 +101,24 @@
     
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 1rem;
-      margin: 2rem 0;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.3rem;
+      margin: 1rem auto;
+      max-width: 350px;
+      justify-items: center;
+      align-items: center;
     }
     
     .photo-placeholder {
-      width: 120px;
-      height: 120px;
+      width: 60px;
+      height: 60px;
       background: linear-gradient(45deg, #ffb3ba, #bae1ff);
       border-radius: 1rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2rem;
+      font-size: 1.5rem;
       color: #666;
-      margin: 0 auto;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
       transition: transform 0.3s ease;
     }
@@ -120,25 +134,33 @@
       margin: 1rem 0;
     }
     
+    .audio-player {
+      width: 100%;
+      max-width: 400px;
+      margin: 1rem auto;
+      display: block;
+    }
+    
     .video-container {
       position: relative;
-      padding-bottom: 120%; /* Keep the same height */
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
       height: 0;
       background: #000;
       border-radius: 1rem;
       overflow: hidden;
       margin: 1rem auto;
-      max-width: 450px; /* Increased from 350px to make it wider */
+      max-width: 100%;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
     
-    .video-container iframe {
+    .video-container video {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      border: none;
+      object-fit: contain;
+      background: #000;
     }
     
     .hidden {
@@ -146,31 +168,34 @@
     }
     
     #passwordContainer {
-      margin-top: 3rem;
+      margin-top: 2rem;
       background: rgba(255, 255, 255, 0.9);
       backdrop-filter: blur(10px);
-      padding: 3rem 2rem;
+      padding: 2rem 1.5rem;
       border-radius: 2rem;
-      max-width: 500px;
-      margin: 3rem auto;
+      max-width: 90%;
+      width: 350px;
+      margin: 2rem auto;
       box-shadow: 0 20px 40px rgba(0,0,0,0.1);
       border: 1px solid rgba(255, 255, 255, 0.3);
     }
     
     #passwordContainer h2 {
       color: #ff4081;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
+      font-size: 1.4rem;
     }
     
     input[type="password"] {
-      padding: 1rem;
-      font-size: 1.1rem;
+      padding: 0.8rem;
+      font-size: 1rem;
       border-radius: 1rem;
       border: 2px solid #ffb3ba;
-      width: 60%;
-      margin-right: 1rem;
+      width: 100%;
+      margin-bottom: 1rem;
       transition: border-color 0.3s ease;
       outline: none;
+      box-sizing: border-box;
     }
     
     input[type="password"]:focus {
@@ -182,12 +207,14 @@
       background: linear-gradient(45deg, #ff4081, #e73370);
       color: white;
       border: none;
-      padding: 1rem 1.5rem;
-      font-size: 1.1rem;
+      padding: 0.8rem 0;
+      font-size: 1rem;
       border-radius: 1rem;
       cursor: pointer;
       transition: all 0.3s ease;
       box-shadow: 0 4px 15px rgba(255, 64, 129, 0.3);
+      width: 100%;
+      display: block;
     }
     
     .unlock-btn:hover {
@@ -255,34 +282,84 @@
         opacity: 0;
       }
     }
+
+    @keyframes confettiFall {
+      to {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
     
     @media (max-width: 768px) {
       body {
-        padding: 1rem;
+        padding: 0.5rem;
       }
       
       .container, #passwordContainer {
-        margin: 1rem auto;
-        padding: 1.5rem;
+        margin: 0.5rem auto;
+        padding: 1rem;
+        width: 90%;
+        max-width: 100%;
+        border-radius: 1.5rem;
+      }
+      
+      h1 {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+      }
+      
+      h2 {
+        font-size: 1.3rem;
       }
       
       input[type="password"] {
         width: 100%;
         margin-bottom: 1rem;
         margin-right: 0;
+        padding: 0.8rem;
       }
       
       .unlock-btn {
         width: 100%;
+        padding: 0.8rem;
       }
       
       .gallery {
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.2rem;
+        max-width: 300px;
       }
       
       .photo-placeholder {
-        width: 100px;
-        height: 100px;
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+      }
+      
+      .secret-btn {
+        width: 100%;
+        padding: 0.8rem;
+      }
+      
+      .video-container {
+        max-width: 100%;
+        padding-bottom: 100%; /* Square for mobile */
+      }
+      
+      .note, .secret, .gallery, .media {
+        margin: 1rem 0;
+        padding: 0.5rem;
+      }
+      
+      #passwordContainer h2 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
       }
     }
   </style>
@@ -302,7 +379,7 @@
 
     <div class="note">
       <h2>💝 Special Birthday Note</h2>
-      <p id="loveNote" style="font-size: 1.2rem; line-height: 1.6; color: #555;"></p>
+      <p id="loveNote">Happy Birthday to the one who fills my life with love and joy! Every day with you feels like a celebration. 💖</p>
     </div>
 
     <div class="gallery">
@@ -329,7 +406,7 @@
 
       <div class="media-container">
         <h2>🎥 A Birthday Video</h2>
-        <div class="video-container">
+        <div class="video-container" id="videoContainer">
           <!-- Video will be inserted here after password entry -->
         </div>
       </div>
@@ -346,27 +423,28 @@
         document.getElementById("loveApp").classList.remove("hidden");
         startBalloons();
         startHearts();
+        startRotatingNotes();
         
         // Play the birthday song
         const birthdaySong = document.getElementById("birthdaySong");
         birthdaySong.play().catch(e => console.log('Audio play failed:', e));
         
         // Create and add video element
-        const videoContainer = document.querySelector('.video-container');
-        if (videoContainer) {
+        const videoContainer = document.getElementById('videoContainer');
+        if (videoContainer && !videoContainer.querySelector('video')) {
           const video = document.createElement('video');
           video.src = "https://res.cloudinary.com/dq38ct7ud/video/upload/v1749624969/WhatsApp_Video_2025-06-11_at_08.54.25_80ca1b69_ghgr4n.mp4";
-          video.muted = true; // Mute the video
+          video.muted = true;
           video.autoplay = true;
           video.loop = true;
-          video.controls = false;
+          video.controls = true; // Enable controls for better UX
           video.style.width = "100%";
           video.style.height = "100%";
           video.style.objectFit = "contain";
           video.style.position = "absolute";
           video.style.top = "0";
           video.style.left = "0";
-          video.style.backgroundColor = "#000"; // Black background for letterboxing
+          video.style.backgroundColor = "#000";
           videoContainer.appendChild(video);
           
           // Start playing the video
@@ -393,10 +471,38 @@
       "Happy Birthday to the one who fills my life with love and joy! Every day with you feels like a celebration. 💖",
       "Wishing you a day as beautiful as your smile and as wonderful as your heart! 🌟",
       "Every moment with you is a reason to celebrate. You bring magic to my world! ✨",
-      "You're the greatest gift to my heart—today, I celebrate the amazing person you are! 🎈"
+      "You're the greatest gift to my heart—today, I celebrate the amazing person you are! 🎈",
+      "Your love is the best thing that's ever happened to me. Happy Birthday, my love! 💕",
+      "On your special day, I'm reminded of how blessed I am to have you in my life. 🙏",
+      "May your birthday be as sweet as the joy you bring to my life every single day! 🍭",
+      "To the one who makes my heart skip a beat - Happy Birthday to my everything! ❤️"
     ];
-    const note = notes[new Date().getDate() % notes.length];
-    document.getElementById("loveNote").textContent = note;
+    
+    function startRotatingNotes() {
+      let noteIndex = 0;
+      
+      // Set initial note
+      const noteElement = document.getElementById("loveNote");
+      if (!noteElement) return;
+      
+      noteElement.textContent = notes[noteIndex];
+      noteElement.style.opacity = 1;
+      
+      // Change note every 8 seconds
+      setInterval(() => {
+        noteIndex = (noteIndex + 1) % notes.length;
+        
+        // Fade out
+        noteElement.style.transition = "opacity 1s";
+        noteElement.style.opacity = 0;
+        
+        // Change text and fade in
+        setTimeout(() => {
+          noteElement.textContent = notes[noteIndex];
+          noteElement.style.opacity = 1;
+        }, 1000);
+      }, 8000);
+    }
 
     function revealMessage() {
       const messages = [
@@ -405,8 +511,11 @@
         "My dearest love, as you blow out your candles today, know that you've already made all my wishes come true just by being in my life. Here's to another year of adventures, laughter, and endless love together! 🎂✨"
       ];
       const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-      document.getElementById("secretMessage").textContent = randomMessage;
-      document.getElementById("secretMessage").style.display = "block";
+      const secretMessageElement = document.getElementById("secretMessage");
+      if (secretMessageElement) {
+        secretMessageElement.textContent = randomMessage;
+        secretMessageElement.style.display = "block";
+      }
       
       // Add confetti effect
       createConfetti();
@@ -433,6 +542,9 @@
     }
 
     function startHearts() {
+      const heartsContainer = document.getElementById('hearts');
+      if (!heartsContainer) return;
+      
       for (let i = 0; i < 10; i++) {
         setTimeout(() => {
           const heart = document.createElement('div');
@@ -440,7 +552,7 @@
           heart.innerHTML = '💖';
           heart.style.left = Math.random() * 100 + 'vw';
           heart.style.animationDelay = `${Math.random() * 2}s`;
-          document.getElementById('hearts').appendChild(heart);
+          heartsContainer.appendChild(heart);
           
           // Remove heart after animation
           setTimeout(() => {
@@ -474,23 +586,6 @@
         }, 3000);
       }
     }
-
-    // Add confetti animation
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes confettiFall {
-        to {
-          transform: translateY(100vh) rotate(720deg);
-          opacity: 0;
-        }
-      }
-      @keyframes shake {
-        0%, 100% { transform: translateX(0); }
-        25% { transform: translateX(-5px); }
-        75% { transform: translateX(5px); }
-      }
-    `;
-    document.head.appendChild(style);
   </script>
 </body>
 </html>
