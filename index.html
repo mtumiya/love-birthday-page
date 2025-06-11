@@ -310,7 +310,7 @@
     <div class="media">
       <div class="media-container">
         <h2>🎵 Your Birthday Song</h2>
-        <audio class="audio-player" controls autoplay>
+        <audio id="birthdaySong" class="audio-player" controls>
           <source src="https://res.cloudinary.com/dq38ct7ud/video/upload/v1749618761/Ed_Sheeran_-_I_Chose_You_Epic_-_Famousfates_zx0q2x.mp3" type="audio/mp3">
           Your browser does not support the audio element.
         </audio>
@@ -336,14 +336,19 @@
         startBalloons();
         startHearts();
         
-        // Start playing the audio
-        const audioPlayer = document.querySelector('.audio-player');
-        audioPlayer.play().catch(e => console.log('Audio autoplay failed:', e));
+        // Play the birthday song
+        const birthdaySong = document.getElementById("birthdaySong");
+        birthdaySong.play().catch(e => console.log('Audio play failed:', e));
         
-        // Reload the iframe to trigger autoplay
-        const videoFrame = document.querySelector('.video-container iframe');
-        const videoSrc = videoFrame.src;
-        videoFrame.src = videoSrc;
+        // Update the iframe to trigger video
+        const videoContainer = document.querySelector('.video-container');
+        if (videoContainer) {
+          const iframe = document.createElement('iframe');
+          iframe.src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1";
+          iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+          iframe.allowFullscreen = true;
+          videoContainer.appendChild(iframe);
+        }
       } else {
         document.getElementById("errorMsg").textContent = "Incorrect password. Please try again. 💔";
         document.getElementById("passwordInput").value = "";
@@ -365,7 +370,7 @@
       "Happy Birthday to the one who fills my life with love and joy! Every day with you feels like a celebration. 💖",
       "Wishing you a day as beautiful as your smile and as wonderful as your heart! 🌟",
       "Every moment with you is a reason to celebrate. You bring magic to my world! ✨",
-      "You're the greatest gift to my heart ..today, I celebrate the amazing person you are! 🎈"
+      "You're the greatest gift to my heart—today, I celebrate the amazing person you are! 🎈"
     ];
     const note = notes[new Date().getDate() % notes.length];
     document.getElementById("loveNote").textContent = note;
