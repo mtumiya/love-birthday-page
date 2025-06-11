@@ -350,14 +350,25 @@
         const birthdaySong = document.getElementById("birthdaySong");
         birthdaySong.play().catch(e => console.log('Audio play failed:', e));
         
-        // Update the iframe to trigger video
+        // Create and add video element
         const videoContainer = document.querySelector('.video-container');
         if (videoContainer) {
-          const iframe = document.createElement('iframe');
-          iframe.src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1";
-          iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-          iframe.allowFullscreen = true;
-          videoContainer.appendChild(iframe);
+          const video = document.createElement('video');
+          video.src = "https://res.cloudinary.com/dq38ct7ud/video/upload/v1749624969/WhatsApp_Video_2025-06-11_at_08.54.25_80ca1b69_ghgr4n.mp4";
+          video.muted = true; // Mute the video
+          video.autoplay = true;
+          video.loop = true;
+          video.controls = false;
+          video.style.width = "100%";
+          video.style.height = "100%";
+          video.style.objectFit = "cover";
+          video.style.position = "absolute";
+          video.style.top = "0";
+          video.style.left = "0";
+          videoContainer.appendChild(video);
+          
+          // Start playing the video
+          video.play().catch(e => console.log('Video play failed:', e));
         }
       } else {
         document.getElementById("errorMsg").textContent = "Incorrect password. Please try again. 💔";
@@ -380,7 +391,7 @@
       "Happy Birthday to the one who fills my life with love and joy! Every day with you feels like a celebration. 💖",
       "Wishing you a day as beautiful as your smile and as wonderful as your heart! 🌟",
       "Every moment with you is a reason to celebrate. You bring magic to my world! ✨",
-      "You're the greatest gift to my heart ..today, I celebrate the amazing person you are! 🎈"
+      "You're the greatest gift to my heart—today, I celebrate the amazing person you are! 🎈"
     ];
     const note = notes[new Date().getDate() % notes.length];
     document.getElementById("loveNote").textContent = note;
